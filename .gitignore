@@ -1,0 +1,6 @@
+# Nsight Systems reports and related artifacts
+**/*.nsys-rep
+**/*.sqlite
+**/nsys_report*.csv
+**/*_nsys_result*.txt
+nsys_transfer_results/

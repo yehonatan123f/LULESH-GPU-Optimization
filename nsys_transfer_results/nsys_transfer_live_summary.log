@@ -1,9 +1,0 @@
-==> [HeCBench-lulesh-omp] s=200 : H2D_MB=2509.510 D2H_MB=25600.001
-==> [HeCBench-lulesh-omp] s=250 : H2D_MB=4896.087 D2H_MB=50000.001
-==> [HeCBench-lulesh-omp] s=300 : H2D_MB=8454.345 D2H_MB=86400.001
-==> [LULESH-codex-translation] s=200 : H2D_MB=8619.123 D2H_MB=19200.000
-==> [LULESH-codex-translation] s=250 : H2D_MB=16829.848 D2H_MB=37500.000
-==> [LULESH-codex-translation] s=300 : H2D_MB=29076.952 D2H_MB=64800.000
-==> [LULESH-codex-optimization] s=200 : H2D_MB=2509.512 D2H_MB=6464.002
-==> [LULESH-codex-optimization] s=250 : H2D_MB=4896.089 D2H_MB=12625.002
-==> [LULESH-codex-optimization] s=300 : H2D_MB=8454.346 D2H_MB=21816.002
