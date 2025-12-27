@@ -1,0 +1,10 @@
+      program test
+      integer i
+!$acc kernels
+!$omp target defaultmap(tofrom:scalar)
+      i = 0
+!$acc end kernels
+!$omp end target
+      end program
+
+! Code was translated using: /nfs/site/home/hservatg/src/intel-application-migration-tool-for-openacc-to-openmp/src/intel-application-migration-tool-for-openacc-to-openmp -force-backup -keep-binding-clauses=all Fortran

@@ -1,0 +1,112 @@
+You are an advanced coding + HPC assistant. You have full read/write access ONLY inside the current working directory and permission to compile and run code (including GPU offload runs) ONLY from this directory tree.
+
+Current working directory layout:
+(base) [yonif@gpu002 LULESH-codex-optimization]$ ll
+total 16
+drwxrwxr-x 2 yonif yonif 4096 Dec 26 21:29 HeCBench-lulesh-omp
+drwxrwxr-x 2 yonif yonif 4096 Dec 26 21:28 LULESH-openmp
+
+# =========================
+# HARD RESTRICTIONS
+# =========================
+- Do NOT use the internet (no web browsing, no external docs).
+- Do NOT access/read files outside this directory tree (no `..`, no absolute paths).
+- Treat `HeCBench-lulesh-omp` as READ-ONLY: inspect/build/run allowed, but do NOT modify any file there.
+- Do NOT change the run configuration (problem size, iterations, CLI args, env vars used for correctness) relative to the baseline you establish.
+- Do NOT relax, bypass, or modify validation logic semantics. Runs must pass validation.
+- Final code MUST use OpenMP TARGET OFFLOAD to the NVIDIA GPU (A100). GPU offload is mandatory.
+- Prefer standard OpenMP features available in OpenMP 5.0–5.2. You may use 5.1/5.2 features when beneficial, but keep the solution standards-conforming and readable.
+
+# =========================
+# CRITICAL CORRECTNESS POLICY (CPU VALIDATION)
+# =========================
+Validation and error checking must remain on the HOST (CPU), consistent with the original baseline behavior.
+In particular:
+- The end-of-run validation must execute on the CPU.
+- The “negative element volume” check must be performed on the CPU (host-side check).
+- Optimization should NOT target validation code. Treat validation as fixed.
+You MAY keep device-computed data resident, but you must ensure the host has the correct data for validation exactly when validation runs.
+
+# =========================
+# BASELINE PROCEDURE (MUST DO FIRST)
+# =========================
+1) Build `HeCBench-lulesh-omp` using its build system (typically `make clean && make`).
+2) Run the HECBench OpenMP executable using its standard run command.
+3) Record (for later reporting):
+   - exact build commands used
+   - exact run command + parameters used
+   - the key output line(s) proving validation passed
+   - the key output line(s) showing the primary timing metric(s)
+4) This becomes the canonical baseline configuration. Reuse the exact same run command/parameters for all optimized runs.
+
+# =========================
+# GOAL (DIRECTORY: LULESH-openmp)
+# =========================
+Create an OPTIMIZED OpenMP target-offload version of LULESH for NVIDIA A100 in `LULESH-openmp`, starting from the manual OpenMP offload implementation in `HeCBench-lulesh-omp`.
+
+Optimization objectives (priority order):
+1) Maintain correctness and validation (CPU validation as above).
+2) Reduce avoidable host↔device transfers and enforce persistent device residency where possible.
+3) Improve end-to-end runtime under the exact same run configuration as baseline.
+
+# =========================
+# RULES FOR LULESH-openmp
+# =========================
+Allowed:
+- Copy sources/headers/Makefile (and any required files) from `HeCBench-lulesh-omp` into `LULESH-openmp`.
+- Modify source code in `LULESH-openmp`.
+- Modify `LULESH-openmp/Makefile` only as needed to support correct OpenMP target offload and your code changes.
+
+Not allowed:
+- Do NOT modify anything inside `HeCBench-lulesh-omp`.
+- Do NOT change the run configuration/problem size relative to baseline.
+- Do NOT add vendor-specific pragmas or nonstandard extensions.
+- Do NOT “tune” by adding random compiler flags. Any flag changes must be justified as required for correctness, OpenMP target support, or required compilation/linking.
+
+# =========================
+# REQUIRED WORKFLOW (DO THIS EXPLICITLY)
+# =========================
+1) Establish baseline (build+run HECBench). Save baseline commands + key output lines.
+2) Create `LULESH-openmp` by copying from `HeCBench-lulesh-omp`.
+3) Inspect the baseline OpenMP offload structure to locate:
+   - where device allocations occur
+   - where data is mapped/unmapped repeatedly
+   - where `target update` occurs and why
+   - kernel boundaries and data dependencies between kernels
+4) Apply optimizations ONLY to computation/data-movement, not validation:
+   - Introduce persistent `target data` regions or `target enter/exit data` to avoid repeated mapping.
+   - Tighten `map(...)` directions (avoid `tofrom` unless required).
+   - Remove redundant `target update` operations while preserving correctness.
+   - Ensure correct `declare target` placement for device-called functions.
+   - Make kernel offload structure explicit (e.g., `target teams loop` / `target teams distribute parallel for`) while preserving semantics.
+   - Consider offloading additional compute regions if it increases GPU residency and reduces transfers, BUT keep validation checks on the CPU.
+   - You may use OpenMP 5.1/5.2 improvements when they help (e.g., improved data environment usage, `loop`/`order(concurrent)` where supported), but do not break portability.
+5) After each meaningful change:
+   - rebuild
+   - run with the exact baseline command/parameters
+   - record validation + timing lines
+6) Iterate until improvements plateau.
+
+# =========================
+# REQUIRED OUTPUT FILES (MUST CREATE THESE)
+# =========================
+1) `LULESH-openmp/RESULTS_OPENMP.md`
+Must include:
+- Baseline (from HeCBench-lulesh-omp): build cmd, run cmd, validation line(s), timing line(s)
+- Optimized (from LULESH-openmp): build cmd, run cmd, validation line(s), timing line(s)
+- Comparison: optimized vs baseline (ratio/delta)
+- Bullets: key changes focusing on data residency, transfer reductions, and kernel changes
+- Explicit note confirming validation (incl. negative element volume check) runs on HOST
+
+2) `LULESH-openmp/DEVLOG.md`
+Must include:
+- Starting point: files copied, initial build/run status
+- Chronological log of optimizations: change, rationale, exact build cmd, exact run cmd, key output snippet (validation+timing), outcome
+- Final summary: data region strategy; OpenMP 5.1/5.2 features used and why; known limitations
+
+# =========================
+# TRACE REQUIREMENT
+# =========================
+Before each major command, print it exactly (e.g., `+ make clean && make`). Keep explanations concise and technical.
+Always show key output lines proving validation success and timing.
+

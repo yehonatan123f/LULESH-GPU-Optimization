@@ -1,0 +1,30 @@
+      program app
+      integer :: N
+      integer :: res1, res2
+!$acc routine(foo,meaningoflife)
+!$omp declare target (foo,meaningoflife)
+!$acc serial copyout(res1, res2)
+!$omp target map(from:res1,res2)
+        call foo(N,res1)
+        res2 = meaningoflife(N)
+!$acc end serial
+!$omp end target
+        write (*,*) res1 .eq. res2
+      end program
+
+      function meaningoflife(N)
+!$omp declare target
+        integer :: N
+!$acc routine
+        meaningoflife = 42 + N
+      end function
+
+      subroutine foo (N, R)
+!$omp declare target
+        integer, intent(in) :: N
+        integer, intent(out) :: R
+!$acc routine
+        R = N + R
+      end subroutine
+
+! Code was translated using: /nfs/pdx/home/hservatg/src/intel-application-migration-tool-for-openacc-to-openmp/src/intel-application-migration-tool-for-openacc-to-openmp -force-backup -keep-binding-clauses=all -fixed 0015.f

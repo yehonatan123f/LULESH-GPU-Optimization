@@ -1,0 +1,54 @@
+subroutine foo(a, b, n)
+  implicit none
+  integer :: a(:)
+  integer :: b(:)
+  integer :: n
+  integer :: i
+
+!$acc kernels copyout(a)
+!$omp target map(from:a) defaultmap(tofrom:scalar)
+!$acc loop
+!$omp loop
+do i=1,n
+  a(i) = i + 1
+enddo
+!$acc end kernels
+!$omp end target
+
+!$acc kernels copyin(a) copyout(b)
+!$omp target map(to:a) map(from:b) defaultmap(tofrom:scalar)
+!$acc loop
+!$omp loop
+do i=1,n
+  b(i) = a(i) + 1
+enddo
+!$acc end kernels
+!$omp end target
+
+!$acc kernels copyin(a) copyout(b)
+!$omp target map(to:a) map(from:b) defaultmap(tofrom:scalar)
+!$acc loop
+!$omp loop
+do i=1,n
+  a(i) = i + 1
+enddo
+!$acc loop
+!$omp loop
+do i=1,n
+  b(i) = a(i) + 1
+enddo
+!$acc end kernels
+!$omp end target
+
+!$acc kernels loop copyin(a) copyout(b)
+!$omp target teams loop map(to:a) map(from:b)&
+!$omp defaultmap(tofrom:scalar)
+do i=1,n
+  b(i) = a(i) + 1
+enddo
+!$acc end kernels loop
+!$omp end target teams loop
+
+end subroutine foo
+
+! Code was translated using: /nfs/site/home/hservatg/src/intel-application-migration-tool-for-openacc-to-openmp/src/intel-application-migration-tool-for-openacc-to-openmp -force-backup -keep-binding-clauses=all Fortran

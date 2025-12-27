@@ -1,0 +1,8 @@
+| LULESH-openacc-work/openacc/src | `-DUSE_MPI=0 -c -mp --restrict -Mautoinline -Minline=levels:20 -acc -ta=nvidia,cc80 -Minfo=accel -DSEDOV_SYNC_POS_VEL_LATE -O3  -o lulesh.o lulesh.cc` | 100 |  |  |
+| LULESH-openacc-work/openacc/src | `-DUSE_MPI=0 -c -mp --restrict -Mautoinline -Minline=levels:20 -acc -ta=nvidia,cc80 -Minfo=accel -DSEDOV_SYNC_POS_VEL_LATE -O3  -o lulesh.o lulesh.cc` | 150 |  |  |
+| LULESH-openacc-work/openacc/src | `-DUSE_MPI=0 -c -mp --restrict -Mautoinline -Minline=levels:20 -acc -ta=nvidia,cc80 -Minfo=accel -DSEDOV_SYNC_POS_VEL_LATE -O3  -o lulesh.o lulesh.cc` | 200 |  |  |
+| LULESH-openacc-work/openacc/src | `-DUSE_MPI=0 -c -mp --restrict -Mautoinline -Minline=levels:20 -acc -ta=nvidia,cc80 -Minfo=accel -DSEDOV_SYNC_POS_VEL_LATE -O3  -o lulesh.o lulesh.cc` | 250 |  |  |
+| LULESH-openacc-work/openacc/src | `-DUSE_MPI=0 -c -mp --restrict -Mautoinline -Minline=levels:20 -acc -ta=nvidia,cc80 -Minfo=accel -DSEDOV_SYNC_POS_VEL_LATE -O3  -o lulesh.o lulesh.cc` | 300 |  |  |
+| LULESH-openacc-work/openacc/src | `-DUSE_MPI=0 -c -mp --restrict -Mautoinline -Minline=levels:20 -acc -ta=nvidia,cc80 -Minfo=accel -DSEDOV_SYNC_POS_VEL_LATE -O3  -o lulesh.o lulesh.cc` | 100 | 2.18 | 4.333329e+08 |
+| LULESH-openacc-work/openacc/src | `-DUSE_MPI=0 -c -mp --restrict -Mautoinline -Minline=levels:20 -acc -ta=nvidia,cc80 -Minfo=accel -DSEDOV_SYNC_POS_VEL_LATE -O3  -o lulesh.o lulesh.cc` | 150 | 4.74 | 1.462499e+09 |
+| LULESH-openacc-work/openacc/src | `-DUSE_MPI=0 -c -mp --restrict -Mautoinline -Minline=levels:20 -acc -ta=nvidia,cc80 -Minfo=accel -DSEDOV_SYNC_POS_VEL_LATE -O3  -o lulesh.o lulesh.cc` | 100 | 2.18 | 4.333329e+08 |

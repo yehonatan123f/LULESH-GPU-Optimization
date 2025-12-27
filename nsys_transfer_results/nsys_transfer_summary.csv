@@ -1,0 +1,10 @@
+impl,s,h2d_mb,d2h_mb,report_base
+HeCBench-lulesh-omp,200,2509.510,25600.001,/home/yonif/LULESH-HIPS26/nsys_transfer_results/HeCBench-lulesh-omp/s200
+HeCBench-lulesh-omp,250,4896.087,50000.001,/home/yonif/LULESH-HIPS26/nsys_transfer_results/HeCBench-lulesh-omp/s250
+HeCBench-lulesh-omp,300,8454.345,86400.001,/home/yonif/LULESH-HIPS26/nsys_transfer_results/HeCBench-lulesh-omp/s300
+LULESH-codex-translation,200,8619.123,19200.000,/home/yonif/LULESH-HIPS26/nsys_transfer_results/LULESH-codex-translation/s200
+LULESH-codex-translation,250,16829.848,37500.000,/home/yonif/LULESH-HIPS26/nsys_transfer_results/LULESH-codex-translation/s250
+LULESH-codex-translation,300,29076.952,64800.000,/home/yonif/LULESH-HIPS26/nsys_transfer_results/LULESH-codex-translation/s300
+LULESH-codex-optimization,200,2509.512,6464.002,/home/yonif/LULESH-HIPS26/nsys_transfer_results/LULESH-codex-optimization/s200
+LULESH-codex-optimization,250,4896.089,12625.002,/home/yonif/LULESH-HIPS26/nsys_transfer_results/LULESH-codex-optimization/s250
+LULESH-codex-optimization,300,8454.346,21816.002,/home/yonif/LULESH-HIPS26/nsys_transfer_results/LULESH-codex-optimization/s300

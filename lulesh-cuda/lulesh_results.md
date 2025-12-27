@@ -1,0 +1,21 @@
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 --restrict -Mautoinline -Minline=levels:20 -Msafeptr -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 100 | 1.250 | 4.333329e+08 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 --restrict -Mautoinline -Minline=levels:20 -Msafeptr -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 150 | 4.150 | 1.462499e+09 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 --restrict -Mautoinline -Minline=levels:20 -Msafeptr -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 200 | 10.560 | 3.466663e+09 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 --restrict -Mautoinline -Minline=levels:20 -Msafeptr -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 250 | 22.700 | 6.770826e+09 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 --restrict -Mautoinline -Minline=levels:20 -Msafeptr -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 300 | 41.760 | 1.169999e+10 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 --restrict -Mautoinline -Minline=levels:20 -Msafeptr -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 350 | 69.940 | 1.857915e+10 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 --restrict -Mautoinline -Minline=levels:20 -Msafeptr -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 400 | 109.500 | 2.773331e+10 |
+| 2_HeCBench/src/lulesh-cuda (clang) | `-std=c++17 -Wall --cuda-gpu-arch=sm_80 --cuda-path=/usr/local/cuda -I/usr/local/cuda/include -O3 -c lulesh.cu -o lulesh.o` | 100 | 1.250 | 4.333329e+08 |
+| 2_HeCBench/src/lulesh-cuda (clang) | `-std=c++17 -Wall --cuda-gpu-arch=sm_80 --cuda-path=/usr/local/cuda -I/usr/local/cuda/include -O3 -c lulesh.cu -o lulesh.o` | 150 | 4.110 | 1.462499e+09 |
+| 2_HeCBench/src/lulesh-cuda (clang) | `-std=c++17 -Wall --cuda-gpu-arch=sm_80 --cuda-path=/usr/local/cuda -I/usr/local/cuda/include -O3 -c lulesh.cu -o lulesh.o` | 200 | 10.670 | 3.466663e+09 |
+| 2_HeCBench/src/lulesh-cuda (clang) | `-std=c++17 -Wall --cuda-gpu-arch=sm_80 --cuda-path=/usr/local/cuda -I/usr/local/cuda/include -O3 -c lulesh.cu -o lulesh.o` | 250 | 22.550 | 6.770826e+09 |
+| 2_HeCBench/src/lulesh-cuda (clang) | `-std=c++17 -Wall --cuda-gpu-arch=sm_80 --cuda-path=/usr/local/cuda -I/usr/local/cuda/include -O3 -c lulesh.cu -o lulesh.o` | 300 | 40.790 | 1.169999e+10 |
+| 2_HeCBench/src/lulesh-cuda (clang) | `-std=c++17 -Wall --cuda-gpu-arch=sm_80 --cuda-path=/usr/local/cuda -I/usr/local/cuda/include -O3 -c lulesh.cu -o lulesh.o` | 350 | 68.350 | 1.857915e+10 |
+| 2_HeCBench/src/lulesh-cuda (clang) | `-std=c++17 -Wall --cuda-gpu-arch=sm_80 --cuda-path=/usr/local/cuda -I/usr/local/cuda/include -O3 -c lulesh.cu -o lulesh.o` | 400 | 108.480 | 2.773331e+10 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 100 | 1.230 | 4.333329e+08 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 150 | 4.180 | 1.462499e+09 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 200 | 10.250 | 3.466663e+09 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 250 | 22.150 | 6.770826e+09 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 300 | 40.770 | 1.169999e+10 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 350 | 67.900 | 1.857915e+10 |
+| 2_HeCBench/src/lulesh-cuda (nvhpc) | ` -std=c++14 -Xcompiler -Wall -cuda -gpu=cc80 -mcmodel=medium -Wl,--no-relax -O3 -c lulesh.cu -o lulesh.o` | 400 | 107.580 | 2.773331e+10 |

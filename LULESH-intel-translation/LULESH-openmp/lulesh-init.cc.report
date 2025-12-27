@@ -1,0 +1,6 @@
+Note the following OpenACC API calls. These have NOT been translated.
+* Line 165 contains an invocation to 'acc_get_num_devices'. You can use omp_get_num_devices().
+* Line 176 contains an invocation to 'acc_set_device_num'. You can use omp_set_default_device().
+* Line 875 contains an invocation to 'acc_shutdown'. This is done automatically by the OpenMP runtime.
+
+

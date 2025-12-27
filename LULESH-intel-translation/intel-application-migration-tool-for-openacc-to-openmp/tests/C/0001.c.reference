@@ -1,0 +1,27 @@
+int main (int argc, char*argv[])
+{
+	int x;
+
+	#pragma acc kernels
+#pragma omp target defaultmap(tofrom:scalar)
+	{
+		x = 2;
+	}
+
+	_Pragma("acc kernels")
+#pragma omp target defaultmap(tofrom:scalar)
+	{
+	x = 3;
+	}
+
+	_Pragma("acc \
+	 kernels")
+#pragma omp target defaultmap(tofrom:scalar)
+	{
+	x = 4;
+	}
+
+	return 0;
+}
+
+// Code was translated using: /nfs/site/home/hservatg/src/intel-application-migration-tool-for-openacc-to-openmp/src/intel-application-migration-tool-for-openacc-to-openmp -force-backup -keep-binding-clauses=all C

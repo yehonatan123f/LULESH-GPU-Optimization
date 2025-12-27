@@ -1,0 +1,151 @@
+```text
+You are an advanced coding + HPC assistant.
+
+You are currently here:
+(base) [yonif@gpu002 LULESH-codex-translation-again]$ ll
+total 12
+drwxrwxr-x 2 yonif yonif 4096 Dec 24 10:17 LULESH-openacc
+drwxrwxr-x 2 yonif yonif 4096 Dec 24 10:18 LULESH-openmp
+
+You have full read/write access **only inside the current working directory** and permission to compile and run code (including GPU offload runs) **only from this directory tree**.
+
+## HARD RESTRICTIONS
+
+* Do NOT use the internet (no web browsing, no external docs).
+* Do NOT access, search, or read any files outside the current directory tree (no `..`, no absolute paths, no scanning home).
+* Treat `LULESH-openacc` as READ-ONLY: you may inspect/build/run it, but do not modify any files there.
+* Do NOT change the problem size or run configuration relative to the baseline you establish.
+* Do NOT modify, bypass, or relax validation logic. Runs must pass validation.
+* Final code must use **OpenMP TARGET OFFLOAD** to the NVIDIA GPU (A100). GPU offload is mandatory.
+
+## OPENMP VERSION GUIDANCE (IMPORTANT)
+
+When translating, you MUST implement the solution using **OpenMP target offload** and you should actively consider OpenMP pragmas/features from **OpenMP 5.0, 5.1, and 5.2**.
+
+Rules:
+* Prefer OpenMP 5.0 constructs as the default baseline (`target`, `target data`, `target enter/exit data`, `teams`, `distribute`, `parallel for`, `simd`, `declare target`, `map(...)`, `is_device_ptr(...)`).
+* If an OpenMP 5.1/5.2 feature can simplify or improve correctness/performance/clarity (e.g., `metadirective`, `loop`, refined mapping controls, assumptions/traits), you MAY use it.
+* If you use any 5.1/5.2 feature, add a short comment in code like: `// OpenMP 5.1` or `// OpenMP 5.2`.
+* Do NOT rely on 5.1/5.2-only features without a safe fallback that still works with a 5.0-style approach, unless strictly unavoidable.
+
+## BASELINE PROCEDURE (MUST DO FIRST)
+
+1. Build `LULESH-openacc` using its build system (typically `make clean && make`).
+2. Run the OpenACC executable using its standard run command.
+3. Record the following baseline artifacts (you will paste these into the report):
+
+   * exact build commands used
+   * exact run command + parameters used
+   * key output line(s) showing validation passed
+   * key output line(s) showing the primary timing metric(s)
+
+4. This becomes the canonical baseline configuration. You must reuse the **same** run command/parameters for all OpenMP runs.
+
+## GOAL (DIRECTORY: `LULESH-openmp`)
+
+Create a correct OpenMP target-offload version of LULESH for NVIDIA A100 in `LULESH-openmp`, based on the OpenACC reference in `LULESH-openacc`, and measure its performance using the **same run configuration** as the baseline.
+
+## RULES FOR `LULESH-openmp`
+
+Allowed:
+
+* Copy sources/headers/Makefile (and any required files) from `LULESH-openacc` into `LULESH-openmp`.
+* Modify source code in `LULESH-openmp`.
+* Modify `LULESH-openmp/Makefile` **only as much as needed** to compile/link OpenMP target offload for NVIDIA A100.
+
+Not allowed:
+
+* Do NOT add/modify optimization or tuning flags beyond what is strictly required to enable OpenMP offload.
+* Do NOT change the run configuration/problem size relative to baseline.
+* Do NOT relax validation logic.
+
+## REQUIRED WORKFLOW (DO THIS EXPLICITLY)
+
+1. Establish the baseline by building and running `LULESH-openacc`, and save baseline commands + key output lines.
+2. In `LULESH-openmp`:
+
+   * copy the necessary files from `LULESH-openacc`
+   * translate OpenACC constructs into OpenMP target-offload constructs (OpenMP 5.0–5.2)
+   * ensure correctness and validation
+   * build successfully
+   * run with the **exact** baseline run command/parameters
+   * record validation success + timing lines
+
+3. Iterate until the OpenMP version validates and is as fast as possible **without adding tuning flags** (code changes are allowed; Makefile changes only for enabling offload).
+
+## REQUIRED OUTPUT FILES (MUST CREATE THESE)
+
+### 1) `LULESH-openmp/RESULTS_OPENMP.md`
+
+Must include:
+
+Baseline (from `LULESH-openacc`):
+
+* exact build commands
+* exact run command + parameters
+* validation success line(s)
+* timing line(s)
+
+OpenMP (from `LULESH-openmp`):
+
+* exact build commands
+* exact run command + parameters (must match baseline)
+* validation success line(s)
+* timing line(s)
+
+Comparison:
+
+* OpenMP time vs baseline time (difference and/or ratio)
+
+Concise bullets:
+
+* key code changes
+* key Makefile changes, explicitly justifying they were ONLY required to enable OpenMP offload (no tuning flags)
+
+### 2) `LULESH-openmp/DEVLOG.md` (human-readable engineering log)
+
+Must include:
+
+Starting point:
+
+* which files were copied from `LULESH-openacc`
+* initial build/run status
+
+Translation steps (OpenACC → OpenMP target):
+
+* for each major OpenACC construct replaced, document:
+
+  * the original OpenACC directive/pattern
+  * the OpenMP target equivalent implemented (mention if 5.1/5.2)
+  * the data mapping strategy used (`target data`, `target enter/exit data`, `map(to/from/alloc)`, etc.)
+* correctness pitfalls encountered and fixes
+
+Iteration log (chronological entries):
+
+* change made
+* rationale
+* exact build command used
+* exact run command used
+* key output snippet (validation + timing)
+* outcome (worked/failed + why)
+
+Final summary:
+
+* final code structure decisions (data regions, kernels, reductions, atomics, etc.)
+* known limitations / follow-ups
+
+Makefile justification:
+
+* explicitly state that Makefile changes were ONLY what was required to enable OpenMP offload (no tuning flags added)
+
+## TRACE / HUMAN READABILITY REQUIREMENT
+
+While working, before each major change, briefly explain the rationale in plain English, and always print the exact command you are about to run. This ensures the terminal transcript is a human-readable trace.
+
+## OUTPUT STYLE REQUIREMENTS
+
+* Always show the exact shell commands you ran.
+* Always include the key output lines proving validation success and timing.
+* Keep explanations concise and technical.
+```
+
