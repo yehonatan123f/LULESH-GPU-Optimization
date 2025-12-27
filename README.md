@@ -32,5 +32,3 @@ Profile data transfers and runtime behavior with Nsight Systems:
 ./run_nsys_transfers.sh
 ```
 
-## Notes
-- Profiling artifacts (Nsight Systems reports) are ignored to keep the repository size manageable.
